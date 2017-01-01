@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +13,19 @@
   <div class="container">
     <ul class="nav navbar-nav">
       <li class="">
-        <a href="/"><span class=""></span>Home</a>
+        <a href="{% url 'index' %}"><span class=""></span>Home</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="navbar-right">
-        <a href=""><span class=""></span>Login</a>
-      </li>
+      {% if user.is_authenticated %}
+        <li class="navbar-right">
+          <a href="{% url 'auth_logout' %}"><span class=""></span>Logout</a>
+        </li>
+      {% else %}
+        <li class="navbar-right">
+          <a href="{% url 'auth_login' %}"><span class=""></span>Login</a>
+        </li>
+      {% endif %}
     </ul>
   </div>
 </nav>
