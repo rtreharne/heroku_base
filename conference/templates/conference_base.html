@@ -2,13 +2,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
     {% block title %}
     {% endblock title %}
-    {</title>
+    </title>
+
+
+
   <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+  {% block head %}
+  {% endblock head %}
 
 </head>
 <body>
@@ -24,11 +34,14 @@
         <li class="navbar-right">
           <a href="{% url 'auth_logout' %}"><span class=""></span>Logout</a>
         </li>
+      <li class="navbar-right">
+        <a href=""><i class="fa fa-user" aria-hidden="true"></i> {{ user.username }}</a>
+      </li>
       {% else %}
         <li class="navbar-right">
-          <a href="{{ conference.slug }}/login"><span class=""></span>Login</a>
+          <a href="/{{ conference.slug }}/login/"><span class=""></span>Login</a>
         </li>
-        <li>
+        <li class="navbar-right">
           <a href="{% url 'registration_register' %}"><span class="">Register</span></a>
 
         </li>

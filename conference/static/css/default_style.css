@@ -1,0 +1,47 @@
+body {
+    font-family: Roboto;
+}
+
+h1 {
+    font-size: 4em;
+}
+
+h2 {
+    font-size: 2.5em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+div.center {
+    text-align: center;
+    border-top: 100px solid gray;
+    border-right: 100px solid transparent;
+}
+
+.jumbotron {
+    height: 100vh;
+    background-color: #1b1112;
+
+}
+
+.jumbotron h1 {
+    color: #98d55e
+}
+
+.jumbotron h2, h3 {
+    color: #D0D0D0
+}
+.navbar {
+    margin-bottom: 0px;
+}
+
+.vertical-center{
+    display: flex;
+    align-items: center;
+}
+
+.left-title {
+
+}

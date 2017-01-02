@@ -1,15 +1,30 @@
 {% extends 'conference_base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    {% if style %}
+    {% else %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/default_style.css' %}"/>
+    {% endif %}
+{% endblock head %}
 
 {% block title %}
-Login - {{ conference.title }}
+    Login - {{ conference.title }}
 {% endblock title %}
-{% block content %}
-<h1>Login</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-primary" type="submit">Submit</button>
-</form>
-{{ conference.slug }}
 
+{% block content %}
+<div class="container">
+    <div class="row">
+         <div class="col-md-6 col-md-offset-3 center">
+            <h2>Login</h2>
+             <br />
+            <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br />
+            <button class="btn btn-default" type="submit">Submit</button>
+            </form>
+         </div>
+    </div>
+</div>
 {% endblock content %}
