@@ -1,0 +1,22 @@
+{% extends "conference_base.html" %}
+
+{% block title %}
+    {{ conference.title }}
+{% endblock title %}
+
+{% block content %}
+    <div class="">
+        <h1>{{ conference.title }}</h1>
+        <h2>{{ conference.location }}</h2>
+        <h3>{{ conference.start|date:"d" }} - {{ conference.finish|date:"d M Y" }}</h3>
+    </div>
+
+    <div class="">
+        <h2>Deadlines</h2>
+        <ul>
+            {% for deadline in deadlines %}
+                <li>{{ deadline.description }} - {{ deadline.date }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}

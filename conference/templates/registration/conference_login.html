@@ -1,0 +1,15 @@
+{% extends 'conference_base.html' %}
+
+{% block title %}
+Login - {{ conference.title }}
+{% endblock title %}
+{% block content %}
+<h1>Login</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+{{ conference.slug }}
+
+{% endblock content %}
