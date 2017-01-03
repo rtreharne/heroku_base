@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Profile
+
+class ProfileAdmin(admin.ModelAdmin):
+    model = Profile
+    list_display = ('last_name', 'first_name', 'affiliation')
+
+admin.site.register(Profile, ProfileAdmin)

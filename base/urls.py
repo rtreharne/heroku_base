@@ -19,6 +19,6 @@ urlpatterns = [
     url(r'^accounts/password/done/$', password_reset_complete, {'template_name': 'registration/password_reset_complete.html'}, name="password_reset_complete"),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^$', user.views.index, name='index'),
-    url(r'^admin', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('conference.urls')),
 ]

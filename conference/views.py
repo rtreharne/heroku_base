@@ -50,3 +50,4 @@ def conference_login(request, slug):
                                                                   'conference': conference})
 
 
+
