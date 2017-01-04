@@ -5,6 +5,8 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from .forms import MyRegistrationForm
 from conference.models import Conference
+from django.contrib.auth.models import User
+from user.models import Profile
 
 # Create your views here.
 def index(request):
@@ -22,6 +24,12 @@ def register_user(request, slug):
         form = MyRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            user = User.objects.latest('id')
+            print(user)
+            affiliation = request.POST['affiliation']
+            profile = Profile(user=user, conference=conference, affiliation=affiliation)
+            profile.save()
+
 
             return HttpResponseRedirect('/{0}/'.format(slug))
         else:

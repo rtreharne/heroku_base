@@ -31,6 +31,10 @@ def conference(request, slug):
                                                'workshops'  : workshops,
                                                'style': style})
 
+def conference_logout(request, slug):
+    logout(request)
+    return HttpResponseRedirect('/{0}'.format(slug))
+
 def conference_login(request, slug):
     style=True
     logout(request)
