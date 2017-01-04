@@ -20,6 +20,7 @@ from django.contrib.auth import (
 )
 
 def conference(request, slug):
+    style=True
     conference = Conference.objects.get(slug=slug)
     deadlines = Deadline.objects.filter(conference=conference)
     symposia = Symposium.objects.filter(conference=conference)
@@ -27,9 +28,11 @@ def conference(request, slug):
     return render(request, 'custom/conference.html', {'conference' : conference,
                                                'deadlines'  : deadlines,
                                                'symposia'   : symposia,
-                                               'workshops'  : workshops})
+                                               'workshops'  : workshops,
+                                               'style': style})
 
 def conference_login(request, slug):
+    style=True
     logout(request)
     conference = Conference.objects.get(slug=slug)
 
@@ -47,7 +50,8 @@ def conference_login(request, slug):
     login_form = ConferenceLoginForm()
 
     return render(request, 'registration/conference_login.html', {'form': login_form,
-                                                                  'conference': conference})
+                                                                  'conference': conference,
+                                                                  'style': style})
 
 
 
