@@ -1,5 +1,7 @@
 {% extends "conference_base.html" %}
+{% load thumbnail %}
 {% load staticfiles %}
+
 
 {% block title %}
     {{ conference.title }}
@@ -7,6 +9,8 @@
 
 {% block head %}
     {% if style %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/default_style.css' %}"/>
+    {% else %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/default_style.css' %}"/>
     {% endif %}
 {% endblock head %}
@@ -20,6 +24,29 @@
                 <h3>{{ conference.start|date:"j" }} - {{ conference.finish|date:"j M Y" }}</h3>
 
                 <hr />
+
+                {% if guests %}
+
+                <h2>Guest Speakers</h2>
+
+                {% for guest in guests %}
+                <div class="guest-container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="user-photo">
+                                {% thumbnail  guest.pic "180x180" crop="center" as im %}
+                                    <img src="{{ im.url }}" />
+                                {% endthumbnail %}
+                                <p class="name">{{ guest.user.first_name}} {{ guest.user.last_name }}</p>
+                                <p class="affiliation">{{ guest.affiliation}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <hr />
+                {% endif %}
 
                 {% if deadlines %}
 

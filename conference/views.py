@@ -18,15 +18,25 @@ from django.contrib.auth import (
     login,
     logout,
 )
+from user.models import Profile
+
+def conf_temp(custom):
+    if custom:
+        return 'custom/conference.html'
+    else:
+        return 'conference.html'
 
 def conference(request, slug):
-    style=True
+    style=False
+    custom=False
     conference = Conference.objects.get(slug=slug)
     deadlines = Deadline.objects.filter(conference=conference)
+    guests = Profile.objects.filter(conference=conference, delegate_type='guest')
     symposia = Symposium.objects.filter(conference=conference)
     workshops = Workshop.objects.filter(conference=conference)
-    return render(request, 'custom/conference.html', {'conference' : conference,
+    return render(request, conf_temp(custom), {'conference' : conference,
                                                'deadlines'  : deadlines,
+                                               'guests'     : guests,
                                                'symposia'   : symposia,
                                                'workshops'  : workshops,
                                                'style': style})

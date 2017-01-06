@@ -4,7 +4,11 @@ from django.contrib.auth.models import User
 from conference.models import Conference
 
 class Profile(models.Model):
+    D_TYPE = (('standard', 'Standard'),
+              ('guest', 'Guest'),
+              ('committee', 'Committee'))
     user = models.ForeignKey(User, blank=True, null=True)
+    delegate_type = models.CharField(max_length=128, choices=D_TYPE, default='standard')
     conference = models.ForeignKey(Conference, blank=True, null=True)
     affiliation = models.CharField(max_length=128, blank=True, null=True)
     bio = models.CharField(max_length=140, blank=True, null=True)

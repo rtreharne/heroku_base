@@ -33,13 +33,18 @@ def register_user(request, slug):
 
             return HttpResponseRedirect('/{0}/'.format(slug))
         else:
-            print(form.errors)
+            args = {}
+            args.update(csrf(request))
+            args['form'] = form
+            args['style'] = style
+            args['conference'] = conference
+            return render(request, 'registration/conference_registration_form.html', args)
 
     args = {}
     args.update(csrf(request))
     args['form'] = MyRegistrationForm()
     args['style'] = style
     args['conference'] = conference
-    print(args)
+
     return render(request, 'registration/conference_registration_form.html', args)
 

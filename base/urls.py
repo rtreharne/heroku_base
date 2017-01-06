@@ -6,6 +6,8 @@ from django.contrib.auth.views import (
     password_reset_complete,
     password_reset_confirm,
 )
+from django.conf import settings
+from django.conf.urls.static import static
 admin.autodiscover()
 
 import user.views
@@ -21,4 +23,4 @@ urlpatterns = [
     url(r'^$', user.views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('conference.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
