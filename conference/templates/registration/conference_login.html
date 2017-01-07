@@ -1,8 +1,10 @@
 {% extends 'conference_base.html' %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 {% block head %}
     {% if style %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/default_style.css' %}"/>
     {% else %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/default_style.css' %}"/>
     {% endif %}
@@ -15,12 +17,12 @@
 {% block content %}
 <div class="container">
     <div class="row">
-         <div class="col-md-6 col-md-offset-3 center">
-            <h2>Login</h2>
+         <div class="col-md-8 col-md-offset-2">
+            <h1>Login</h1>
              <br />
             <form action="" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form|crispy}}
             <br />
             <button class="btn btn-default" type="submit">Submit</button>
             </form>

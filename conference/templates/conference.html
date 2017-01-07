@@ -18,7 +18,7 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div id="home" class="col-md-8 col-md-offset-2">
                 <h1>{{ conference.title }}</h1>
                 <h2>{{ conference.location }}</h2>
                 <h3>{{ conference.start|date:"j" }} - {{ conference.finish|date:"j M Y" }}</h3>
@@ -29,23 +29,70 @@
 
                 <h2>Guest Speakers</h2>
 
-                {% for guest in guests %}
+
                 <div class="guest-container">
                     <div class="row">
-                        <div class="col-md-4">
+                        {% for guest in guests %}
+                        <div class="col-sm-4 col-xs-12 col-md-4">
                             <div class="user-photo">
                                 {% thumbnail  guest.pic "180x180" crop="center" as im %}
                                     <img src="{{ im.url }}" />
                                 {% endthumbnail %}
-                                <p class="name">{{ guest.user.first_name}} {{ guest.user.last_name }}</p>
+                                <p class="name">{{ guest.user.first_name}} <br/> {{ guest.user.last_name }}</p>
                                 <p class="affiliation">{{ guest.affiliation}}</p>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
-                {% endfor %}
 
                 <hr />
+                {% endif %}
+
+                {% if symposia %}
+
+                <h2>Symposia</h2>
+
+                <div class="symposia-container">
+                    <div class="row">
+                        {% for symposium in symposia %}
+                        <div class="col-sm-6" >
+                            <div class="symposium-photo">
+                                <p class="title">{{ symposium.title }}</p>
+                                {% thumbnail  symposium.pic "400x200" crop="center" as im %}
+                                    <img src="{{ im.url }}" />
+                                {% endthumbnail %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <hr />
+
+                {% endif %}
+
+                {% if workshops %}
+
+                <h2>Workshops</h2>
+
+                <div class="guest-container">
+                    <div class="row">
+                        {% for workshop in workshops %}
+                        <div class="col-lg-12" >
+                            <div class="workshop-photo">
+                                <p class="name">{{ workshop.title }}</p>
+                                {% thumbnail  workshop.pic "700x200" crop="center" as im %}
+                                    <img src="{{ im.url }}" />
+                                {% endthumbnail %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <hr />
+
                 {% endif %}
 
                 {% if deadlines %}
@@ -57,29 +104,33 @@
                     {% endfor %}
                 </ul>
 
+                <hr />
+
                 {% endif %}
 
-                {% if symposia %}
-                <h2>Symposia</h2>
-                 <ul>
-                    {% for symposium in symposia %}
-                        <li>{{ symposium.title }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
+                {% if committee %}
+
+                <h2>Committee</h2>
+
+                 <div class="committee-container">
+                    <div class="row">
+                        {% for member in committee %}
+                        <div class="col-xs-6 col-sm-3" >
+                            <div class="user-photo">
+                                {% thumbnail  member.pic "180x180" crop="center" as im %}
+                                    <img src="{{ im.url }}" />
+                                {% endthumbnail %}
+                                <p class="name">{{ member.user.first_name }} <br /> {{ member.user.last_name }}</p>
+                                <p class="affiliation">{{ member.affiliation }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
 
                 <hr />
-                
-                {% if workshops %}
-                <h2>Workshops</h2>
-                 <ul>
-                    {% for workshop in workshops %}
-                        <li>{{ workshop.title }}</li>
-                    {% endfor %}
-                </ul>
                 {% endif %}
 
-                <hr />
             </div>
         </div>
     </div>

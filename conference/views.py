@@ -11,8 +11,9 @@ from .models import (
     Symposium,
     Workshop,
     Theme,
+    SocialLink
 )
-from .forms import ConferenceLoginForm
+from .forms import ConferenceLoginForm, ConferenceContactForm
 from django.contrib.auth import (
     authenticate,
     login,
@@ -32,13 +33,20 @@ def conference(request, slug):
     conference = Conference.objects.get(slug=slug)
     deadlines = Deadline.objects.filter(conference=conference)
     guests = Profile.objects.filter(conference=conference, delegate_type='guest')
+    committee = Profile.objects.filter(conference=conference, delegate_type='committee')
     symposia = Symposium.objects.filter(conference=conference)
     workshops = Workshop.objects.filter(conference=conference)
+    contact_form = ConferenceContactForm()
+    social_links = SocialLink.objects.filter(conference=conference)
+    print(social_links)
     return render(request, conf_temp(custom), {'conference' : conference,
                                                'deadlines'  : deadlines,
                                                'guests'     : guests,
+                                               'committee'   : committee,
                                                'symposia'   : symposia,
                                                'workshops'  : workshops,
+                                               'contact_form': contact_form,
+                                               'social'     : social_links,
                                                'style': style})
 
 def conference_logout(request, slug):

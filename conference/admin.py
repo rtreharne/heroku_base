@@ -5,6 +5,8 @@ from .models import (
     Symposium,
     Theme,
     Workshop,
+    SocialLink,
+    SocialType,
 )
 
 class ConferenceAdmin(admin.ModelAdmin):
@@ -35,3 +37,5 @@ admin.site.register(Deadline, DeadlineAdmin)
 admin.site.register(Symposium, SymposiumAdmin)
 admin.site.register(Theme, ThemeAdmin)
 admin.site.register(Workshop, WorkshopAdmin)
+admin.site.register(SocialLink)
+admin.site.register(SocialType)

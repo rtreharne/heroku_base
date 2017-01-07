@@ -52,5 +52,22 @@ class Workshop(models.Model):
         return str(self.title)
 
 
+class SocialType(models.Model):
+    name = models.CharField(max_length=20)
+    fa = models.CharField(max_length=25)
+
+    def __unicode__(self):
+        return str(self.name)
+
+class SocialLink(models.Model):
+    type = models.ForeignKey(SocialType)
+    conference = models.ForeignKey(Conference)
+    url = models.URLField()
+
+    def __unicode__(self):
+        return str('{0}:{1}'.format(self.type, self.conference))
+
+
+
 
 

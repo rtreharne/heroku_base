@@ -1,5 +1,5 @@
 {% extends 'conference_base.html' %}
-
+{% load crispy_forms_tags %}
 {% load staticfiles %}
 
 {% block head %}
@@ -13,10 +13,17 @@ Registration Form - {{ conference.title }}
 {% endblock title %}
 
 {% block content %}
-<h1>Registration Form</h1>
-<form role="form" action="" method="post">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>Registration Form</h1>
+            <form role="form" action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}

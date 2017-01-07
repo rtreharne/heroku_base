@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,17 +17,21 @@
   <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   {% block head %}
   {% endblock head %}
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <ul class="nav navbar-nav">
       <li class="">
-        <a href="/{{ conference.slug}}"><span class=""></span>Home</a>
+        <a href="/{{ conference.slug}}/#home"><span class=""></span>Home</a>
+      </li>
+        <li class="">
+        <a href="/{{ conference.slug}}/#contact"><span class=""></span>Contact</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -51,6 +56,42 @@
 </nav>
 
 {% block content %}{% endblock %}
+
+<footer class="">
+    <div class="container footer">
+          <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+              <div id="contact" class="col-md-6">
+                <h2>Contact Us</h2>
+                 <form action="" method="POST" class="conference-form">
+                    {% csrf_token %}
+                    {{ contact_form|crispy}}
+                    <br />
+                    <button class="btn btn-default" type="submit">Submit</button>
+                    </form>
+              </div>
+
+              {% if social %}
+              <div class="social-links col-md-6">
+
+                <h2>Social</h2>
+                <div class="social-icons">
+                    {% for link in social %}
+                    <a href="{{ link.url }}" target="_blank"><i class="fa {{ link.type.fa }} fa-5x" aria-hidden="true"></i></a>
+                    {% endfor %}
+                </div>
+              </div>
+              {% endif %}
+            </div>
+
+          </div>
+
+    </div>
+    <div class="copyright">
+        <span>Copyright {{conference.title}}</span>
+    </div>
+
+</footer>
 
 </body>
 </html>
