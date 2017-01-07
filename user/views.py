@@ -7,7 +7,8 @@ from .forms import MyRegistrationForm
 from conference.models import Conference
 from django.contrib.auth.models import User
 from user.models import Profile
-
+from conference.forms import ConferenceContactForm
+from conference.models import SocialLink
 # Create your views here.
 def index(request):
     conferences = Conference.objects.all()
@@ -17,6 +18,9 @@ def index(request):
 def register_user(request, slug):
     conference = Conference.objects.get(slug=slug)
     style=True
+    contact_form = ConferenceContactForm()
+    social = SocialLink.objects.filter(conference=conference)
+
     if request.user.is_authenticated():
         return HttpResponseRedirect('/{0}/'.format(slug))
 
@@ -38,6 +42,8 @@ def register_user(request, slug):
             args['form'] = form
             args['style'] = style
             args['conference'] = conference
+            args['contact_form'] = contact_form
+            args['social'] = social
             return render(request, 'registration/conference_registration_form.html', args)
 
     args = {}
@@ -45,6 +51,8 @@ def register_user(request, slug):
     args['form'] = MyRegistrationForm()
     args['style'] = style
     args['conference'] = conference
+    args['contact_form'] = contact_form
+    args['social'] = social
 
     return render(request, 'registration/conference_registration_form.html', args)
 

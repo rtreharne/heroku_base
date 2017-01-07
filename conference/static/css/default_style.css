@@ -138,6 +138,7 @@ div.social-icons i.fa {
     margin: 1%;
 }
 
-div#home {
+div#home, div#registration-form {
     padding-top: 60px;
+    padding-bottom: 30px;
 }
